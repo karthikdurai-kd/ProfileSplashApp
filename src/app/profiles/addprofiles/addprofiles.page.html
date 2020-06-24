@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/profiles">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title class="ionTitle">Add Profiles</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="delete()">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <form #f="ngForm" (ngSubmit)="submitProfile()">
+   <ion-grid>
+     <ion-row>
+       <ion-col size-md="8" offset-md="2">
+         <ion-item>
+           <ion-label position="floating">
+             Name
+           </ion-label>
+           <ion-input type="text" name="name" required ngModel  #name="ngModel"></ion-input>
+         </ion-item>
+         <ion-item *ngIf="name.touched && name.invalid" lines="none">
+          <ion-label style="font-size: medium;">Name is required</ion-label>
+         </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size-md="8" offset-md="2">
+          <ion-item>
+            <ion-label position="floating">Age</ion-label>
+            <ion-input type="number" name="age" required ngModel #age="ngModel"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="age.touched && age.invalid" lines="none">
+            <ion-label style="font-size: medium;">Age is required</ion-label>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <ion-item>
+          <ion-label position="floating">Phone No</ion-label>
+          <ion-input type="number" name="phoneNo" required ngModel #phoneNo="ngModel"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="phoneNo.touched && phoneNo.invalid" lines="none">
+          <ion-label style="font-size: medium;">Phone No is required</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <app-imagepicker (imagePick)="onImagePick($event)" required #imagePick [imageBool]="imageFlag"></app-imagepicker>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <ion-button type="submit" color="success" expand="block" [disabled]="f.invalid">
+          Click To Save
+        </ion-button>
+      </ion-col>
+    </ion-row>
+   <ion-input type="text" name="imageURL" ngModel [(ngModel)]="imageString" *ngIf="flag" style="display: none;"></ion-input>
+   </ion-grid>
+   </form>
+  
+</ion-content>
